@@ -1,4 +1,4 @@
-class Api::V1::ClapsController < ApplicationController
+class Api::V1::ClapsController < ApiController
     before_action :authenticate
     before_action :find_recipe
     #before_action :already_claped, only: [:destroy]
@@ -9,6 +9,7 @@ class Api::V1::ClapsController < ApplicationController
             render json: {message: 'No puedes dar clap mas de una vez'}
         else
             @recipe.claps.create(user_id: current_user.id)
+            @recipe.update(clap: @recipe.claps + 1)
             render json: {recipe: @recipe, clap: @recipe.claps.last}
         end
     end

@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_25_191159) do
+ActiveRecord::Schema.define(version: 2022_07_26_162319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "claps", force: :cascade do |t|
     t.bigint "recipe_id", null: false
@@ -26,10 +46,11 @@ ActiveRecord::Schema.define(version: 2022_07_25_191159) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.string "category"
     t.string "instruction"
     t.string "image"
     t.integer "clap", default: 0, null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_recipes_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
