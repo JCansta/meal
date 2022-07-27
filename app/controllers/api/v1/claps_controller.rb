@@ -9,7 +9,7 @@ class Api::V1::ClapsController < ApiController
             render json: {message: 'No puedes dar clap mas de una vez'}
         else
             @recipe.claps.create(user_id: current_user.id)
-            @recipe.update(clap: @recipe.claps + 1)
+            @recipe.update(clap: @recipe.claps.to_i + 1)
             render json: {recipe: @recipe, clap: @recipe.claps.last}
         end
     end
