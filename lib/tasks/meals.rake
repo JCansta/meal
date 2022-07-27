@@ -1,7 +1,7 @@
 desc 'Llama a la api de Free Meal Api y genera 50 recetas con los endpoints. Si la categoria en estas recetas no existe, las crea'
 
 task :meals => :environment do
-    1.times do
+    50.times do
         response = JSON.parse(RestClient.get('www.themealdb.com/api/json/v1/1/random.php', headers={}))
         response = response['meals'][0]
         category_id = find_category(response['strCategory'])

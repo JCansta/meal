@@ -6,20 +6,15 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+3.0.0
+* Endpoints Link
+https://documenter.getpostman.com/view/22397146/UzXNUxeJ
 
-* System dependencies
+* generate 50 recipes using mealdb api
+rake meals
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* Testing
+bundle exec rake -t
 
 * ...
 # meal

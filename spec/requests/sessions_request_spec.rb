@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
     
-    describe "GET /api/v1/sessions" do
+    describe "POST /api/v1/sessions" do
         context 'succesful login' do
             before do
-                post '/api/v1/sessions', params: { email: "brayitan", password: "123"}
+                post '/api/v1/sessions', params: { email: "jaime", password: "123"}
             end
 
             it "return created status code" do

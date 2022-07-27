@@ -6,8 +6,8 @@ class Api::V1::RecipesController < ApiController
     end
 
     def show
-        recipes = Recipe.find(recipe_params[:recipe_id])
-        render json: {recipes: recipes}, status: :found
+        recipe = Recipe.find(params[:id])
+        render json: {recipes: recipe}, status: :found
     end
 
     def create
@@ -20,7 +20,7 @@ class Api::V1::RecipesController < ApiController
     private
 
     def recipe_params
-        params.require(:recipes).permit(:recipe_id, :name, :category_id, :instruction, :image)
+        params.require(:recipes).permit(:id, :name, :category_id, :instruction, :image)
     end
 
 end
