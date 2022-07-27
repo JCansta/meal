@@ -11,10 +11,10 @@ class ApiController < ActionController::API
     attr_reader :current_user 
 
     def render_404(message)
-        return render json: {message: message}
+        return render json: {message: message}, status: :not_found
     end
 
     def invalid(message)
-        return render json: {message: message}
+        return render json: {message: message}, status: :not_found
     end
 end

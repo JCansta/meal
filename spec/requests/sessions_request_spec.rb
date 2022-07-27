@@ -5,7 +5,8 @@ RSpec.describe "Sessions", type: :request do
     describe "POST /api/v1/sessions" do
         context 'succesful login' do
             before do
-                post '/api/v1/sessions', params: { email: "jaime", password: "123"}
+                post '/api/v1/sign_up', params: {sign_up:{ email: "jaime", password: "123"}}
+                post '/api/v1/sessions', params: {sessions: { email: "jaime", password: "123"}}
             end
 
             it "return created status code" do
@@ -17,13 +18,29 @@ RSpec.describe "Sessions", type: :request do
             end
         end
 
-        context 'login failed' do
+        context 'login failed user' do
             before do
-                post '/api/v1/sessions', params: { email: "noexiste", password: "123"}
+                post '/api/v1/sign_up', params: {sign_up:{ email: "jaime", password: "123"}}
+                post '/api/v1/sessions', params: {sessions:{ email: "noexiste", password: "123"}}
             end
 
             it "returns  forbidden status code" do
-                expect(response).to have_http_status(:forbidden)
+                expect(response).to have_http_status(:not_found)
+            end
+
+            it "returns errors message" do
+                expect(json['message']).to eq("Couldn't find User")
+            end
+        end
+
+        context 'login failed password' do
+            before do
+                post '/api/v1/sign_up', params: {sign_up:{ email: "jaime", password: "123"}}
+                post '/api/v1/sessions', params: {sessions:{ email: "jaime", password: "123123"}}
+            end
+
+            it "returns  forbidden status code" do
+                expect(response).to have_http_status(:not_found)
             end
 
             it "returns errors message" do

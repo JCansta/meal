@@ -1,15 +1,17 @@
 class Api::V1::SessionsController < ApiController
     def create
-        user = User.find_by(email: params[:email])
-        if user.authenticate(params[:password])
+        user = User.find_by!(email: sessions_params[:email])
+        if user.authenticate(sessions_params[:password])
             token = JWT.encode({user_id: user.id}, 'a', 'HS256')
-            render json: {access_token: token}, status: :created
+            return render json: {access_token: token}, status: :created
         else
-            render json: {errors: "usuario invalido"}, status: :forbidden
+            return render json: {errors: "usuario invalido"}, status: 404
         end
     end
 
+    private
+
     def sessions_params
-        params.permit(:email, :password)
+        params.require(:sessions).permit(:email, :password)
     end
 end

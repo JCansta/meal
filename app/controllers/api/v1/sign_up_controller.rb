@@ -3,7 +3,7 @@ class Api::V1::SignUpController < ApiController
         user = User.new(email: sign_up_params[:email], password: sign_up_params[:password])
         user.save!
         token = JWT.encode({user_id: user.id}, 'a', 'HS256')
-        render json: {access_token: token}, status: :created
+        return render json: {access_token: token}, status: :created
     end
 
     private

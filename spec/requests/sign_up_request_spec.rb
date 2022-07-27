@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "SignUp", type: :request do
     
-    describe "GET /api/v1/sign_up" do
+    describe "POST /api/v1/sign_up" do
         context 'succesful sign up' do
             before do
-                post '/api/v1/sign_up', params: { email: "jaimecastro@hotmail.com", password: "123"}
+                post '/api/v1/sign_up', params: {sign_up:{ email: "jaimecastro@hotmail.com", password: "123"}}
             end
 
             it "return created status code" do
@@ -19,15 +19,15 @@ RSpec.describe "SignUp", type: :request do
 
         context 'sign up failed' do
             before do
-                post '/api/v1/sign_up', params: { email: "noexiste", password: "123"}
+                post '/api/v1/sign_up', params: {sign_up:{ email: "jaimecastro@hotmail.com", password: ""}}
             end
 
             it "returns forbidden status code" do
-                expect(response).to have_http_status(:forbidden)
+                expect(response).to have_http_status(:not_found)
             end
 
             it "returns errors message" do
-                expect(json['message']).to eq("solo formato email")
+                expect(json['message']).to eq("Validation failed: Password can't be blank")
             end
         end
 
