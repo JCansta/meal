@@ -53,3 +53,4 @@ gem 'activeadmin'
 gem 'sass-rails'
 
 gem 'rake', '>= 12.2'
+gem "ffi", "~> 1.15"

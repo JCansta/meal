@@ -255,6 +255,7 @@ DEPENDENCIES
   byebug
   factory_bot_rails
   faker
+  ffi (~> 1.15)
   jwt (~> 2.2, >= 2.2.3)
   listen (~> 3.3)
   pg (~> 1.1)
@@ -272,4 +273,4 @@ RUBY VERSION
    ruby 3.0.0p0
 
 BUNDLED WITH
-   2.3.18
+   2.2.3
