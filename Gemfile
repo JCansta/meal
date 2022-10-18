@@ -52,4 +52,4 @@ gem 'rest-client'
 gem 'activeadmin'
 gem 'sass-rails'
 
-gem 'rake', '>= 12.2'
+#gem 'rake', '>= 12.2'
